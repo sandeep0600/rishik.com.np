@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 import NProgress from 'nprogress'
+import { NavLink } from 'react-router-dom';
 class Table extends Component {
 
     state ={
@@ -23,7 +24,11 @@ class Table extends Component {
          NProgress.done(1.0);
        })
    }
-
+   deletePost=()=>{
+    axios.delete('http://localhost:4000/api/posts/').then(result=>{
+        console.log('done')
+    })
+   }
     render(){
         const allpost = this.state.posts.map(allposts =>{
             return (
@@ -32,7 +37,7 @@ class Table extends Component {
                       <td>{allposts.author}</td>
                       <td>{allposts.category}</td>
                       <td></td>
-                      <td><button type="button" className="btn btn-primary">Edit</button>&nbsp;<button type="button" className="btn btn-danger">Delete</button></td>
+                      <td><NavLink to={'/editpost/'+ allposts._id } type="button" className="btn btn-primary">Edit</NavLink>&nbsp;<button type="button" onClick={this.deletePost} className="btn btn-danger">Delete</button></td>
                </tr>
             )
         })
