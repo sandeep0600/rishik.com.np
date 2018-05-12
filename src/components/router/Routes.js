@@ -12,7 +12,7 @@ class appRoute extends Component {
                     <Switch>
                         <Route exact path="/" component={dashboard} />
                         <Route path="/addpost" component={addPost} />
-                        <Route path="/editpost/:id" component={editPost} />
+                        <Route path="/editpost/post=:id&action=edit" component={editPost} />
                         <Route path="/allpost" component={allPost} />
                         <Route path="/gallery" component={gallery} />
 

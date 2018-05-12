@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-import NProgress from 'nprogress'
+import Progress from "react-progress-2";
+import "react-progress-2/main.css"
 import { NavLink } from 'react-router-dom';
 class Table extends Component {
 
@@ -8,21 +9,24 @@ class Table extends Component {
         posts : []
     }
    componentDidMount(){
-    NProgress.start(0.0);
+    Progress.show();
        axios.get('http://localhost:4000/api/posts/')
        .then(result =>{
            console.log(result)
-        const Pro = result.data
-        const somthing = Pro.map(datas=>{
+            const Pro = result.data.postData
+            const somthing = Pro.map(datas=>{
             return{
                 ...datas,
                 }
         })
+    
         setTimeout(()=> {
-            this.setState({posts : somthing})
-        },3000)
-         NProgress.done(1.0);
+        this.setState({posts : somthing})
+        Progress.hide();   
+         },3000)
+
        })
+ 
    }
   delete(allposts){
    axios.delete('http://localhost:4000/api/posts/'+ allposts._id)
@@ -41,7 +45,7 @@ class Table extends Component {
                       <td>{allposts.author}</td>
                       <td>{allposts.category}</td>
                       <td></td>
-                      <td><NavLink to={'/editpost/'+ allposts._id } type="button" className="btn btn-primary">Edit</NavLink>&nbsp;<button type="button" onClick={this.delete.bind(this, allposts)} className="btn btn-danger">Delete</button></td>
+                      <td><NavLink to={'/editpost/post='+ allposts._id+'&action=edit' } type="button" className="btn btn-primary">Edit</NavLink>&nbsp;<button type="button" onClick={this.delete.bind(this, allposts)} className="btn btn-danger">Delete</button></td>
                </tr>
             )
         })
@@ -50,6 +54,7 @@ class Table extends Component {
             <div className="card-header">
               <i className="fa fa-table"></i>All Posts</div>
             <div className="card-body">
+            <Progress.Component/>
               <div className="table-responsive">
                 <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="0">
                   <thead>
