@@ -6,11 +6,15 @@ import {NavLink} from 'react-router-dom'
 import axios from 'axios'
 class editPost extends Component {
     state = {
-        posts:[]
+        posts:[],
+        title: '',
+        author:'',
+        category:'',
+        content:''
 
     }
     componentDidMount(){
-        setTimeout(()=> {
+//        setTimeout(()=> {
         axios.get('http://localhost:4000/api/posts/'+ this.props.match.params.id)
         .then(result=>{
             //console.log(result)
@@ -18,13 +22,26 @@ class editPost extends Component {
 
             this.setState({posts : Pro})
         })
-    },3000)
+//    },3000)
     }
+    SendInfo=()=>{
+        const data = {
+            title:this.state.title,
+            author:this.state.author,
+            category:this.state.category,
+            content:this.state.content
+        }
+        axios.put('http://localhost:4000/api/posts/'+ this.props.match.params.id, data)
+        .then(response =>{
+            console.log(response)
 
-
-
+        })
+        .catch(error => {
+            console.log(error.response)
+        });
+    }
     render(){
-        console.log(this.state.posts)
+        //console.log(this.state.posts)
         
         return(
             <App>
@@ -37,36 +54,36 @@ class editPost extends Component {
                   <li className="breadcrumb-item active">Edit Post</li>
                 </ol>
                 <div className="row">
-                <div className="container">
-                <div className="form-group">
-              <label htmlFor="exampleInputEmail1">Title</label>
-              <input type="text" value={this.state.posts.title} onChange={(event)=>this.setState({title:(event.target.value)})} className="form-control" id="postTitle" aria-describedby="postTitle"/>
-            </div>
-            <div className="form-group">
-              <label htmlFor="exampleInputPassword1">Author</label>
-              <input type="text" value={this.state.posts.author} onChange={(event)=>this.setState({author:(event.target.value)})} className="form-control" id="postAuthor" aria-describedby="postAuthor"/>
-            </div>
-            <div className="form-group">
-              <label htmlFor="exampleInputPassword1">Category</label>
-              <input type="text" value={this.state.posts.category} onChange={(event)=>this.setState({category:(event.target.value)})} className="form-control" id="postCategory" aria-describedby="postCategory"/>
-            </div>
-            <div className="form-group">
-              <label htmlFor="exampleInputPassword1">Tag</label>
-              <input type="text" className="form-control" id="postTag" aria-describedby="postTag"/>
-            </div>
-            <div className="form-group">
-              <label htmlFor="exampleTextarea">Content</label>
-              <textarea value={this.state.posts.content} onChange={(event)=>this.setState({content:(event.target.value)})} className="form-control" id="exampleTextarea" rows="3"></textarea>
-            </div>
-            <div className="form-group">
-              <label htmlFor="exampleInputFile">Image</label>
-              <input type="file" className="form-control-file" id="exampleInputFile" aria-describedby="fileHelp"/>
-              <small id="fileHelp" className="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
-            </div>
-            <button type="submit" onClick={this.SendInfo} className="btn btn-primary">Submit</button>
+                  <div className="container">
+                    <div className="form-group">
+                      <label htmlFor="exampleInputEmail1">Title</label>
+                      <input type="text" placeholder={this.state.posts.title} onChange={(event)=>this.setState({title:(event.target.value)})} className="form-control" id="postTitle" aria-describedby="postTitle"/>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="exampleInputPassword1">Author</label>
+                      <input type="text" placeholder={this.state.posts.author} onChange={(event)=>this.setState({author:(event.target.value)})} className="form-control" id="postAuthor" aria-describedby="postAuthor"/>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="exampleInputPassword1">Category</label>
+                      <input type="text" placeholder={this.state.posts.category} onChange={(event)=>this.setState({category:(event.target.value)})} className="form-control" id="postCategory" aria-describedby="postCategory"/>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="exampleInputPassword1">Tag</label>
+                      <input type="text" className="form-control" id="postTag" aria-describedby="postTag"/>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="exampleTextarea">Content</label>
+                      <textarea placeholder={this.state.posts.content} onChange={(event)=>this.setState({content:(event.target.value)})} className="form-control" id="exampleTextarea" rows="3"></textarea>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="exampleInputFile">Image</label>
+                      <input type="file" className="form-control-file" id="exampleInputFile" aria-describedby="fileHelp"/>
+                      <small id="fileHelp" className="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+                    </div>
+                    <button type="submit" onClick={this.SendInfo} className="btn btn-primary">Submit</button>
+                  </div>
+                  </div>
                 </div>
-                </div>
-              </div>
                 <Footer/>
             </div>
         </App>

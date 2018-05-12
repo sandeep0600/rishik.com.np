@@ -4,7 +4,6 @@ import Aux from '../../hoc/_Aux'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 class Form extends Component {
-
     state = {
         title: '',
         author:'',

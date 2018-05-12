@@ -24,11 +24,15 @@ class Table extends Component {
          NProgress.done(1.0);
        })
    }
-   deletePost=()=>{
-    axios.delete('http://localhost:4000/api/posts/').then(result=>{
-        console.log('done')
-    })
-   }
+  delete(allposts){
+   axios.delete('http://localhost:4000/api/posts/'+ allposts._id)
+   const newState = this.state.posts.slice();
+    if (newState.indexOf(allposts) > -1) {
+      newState.splice(newState.indexOf(allposts), 1);
+      this.setState({posts: newState})
+    }
+  }
+
     render(){
         const allpost = this.state.posts.map(allposts =>{
             return (
@@ -37,7 +41,7 @@ class Table extends Component {
                       <td>{allposts.author}</td>
                       <td>{allposts.category}</td>
                       <td></td>
-                      <td><NavLink to={'/editpost/'+ allposts._id } type="button" className="btn btn-primary">Edit</NavLink>&nbsp;<button type="button" onClick={this.deletePost} className="btn btn-danger">Delete</button></td>
+                      <td><NavLink to={'/editpost/'+ allposts._id } type="button" className="btn btn-primary">Edit</NavLink>&nbsp;<button type="button" onClick={this.delete.bind(this, allposts)} className="btn btn-danger">Delete</button></td>
                </tr>
             )
         })
