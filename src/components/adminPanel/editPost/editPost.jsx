@@ -5,6 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import Footer from '../Footer/Footer'
 import {NavLink} from 'react-router-dom'
 import axios from 'axios'
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; 
 // import Progress from "react-progress-2";
 // import "react-progress-2/main.css"
 class editPost extends Component {
@@ -53,6 +55,9 @@ class editPost extends Component {
             console.log(error.response)
         });
     }
+    handleChange=(value)=>{
+      this.setState({ content: value })
+    }
     render(){
         //console.log(this.state.posts)
         
@@ -85,10 +90,8 @@ class editPost extends Component {
                       <label htmlFor="exampleInputPassword1">Tag</label>
                       <input type="text" className="form-control" id="postTag" aria-describedby="postTag"/>
                     </div>
-                    <div className="form-group">
-                      <label htmlFor="exampleTextarea">Content</label>
-                      <textarea placeholder={this.state.content} onChange={(event)=>this.setState({content:(event.target.value)})} className="form-control" id="exampleTextarea" rows="3"></textarea>
-                    </div>
+                    <label htmlFor="exampleInputPassword1">Content</label>
+                    <ReactQuill value={this.state.content} onChange={this.handleChange}  modules={editPost.modules} formats={editPost.formats}/>
                     <div className="form-group">
                       <label htmlFor="exampleInputFile">Image</label>
                       <input type="file" className="form-control-file" id="exampleInputFile" aria-describedby="fileHelp"/>
@@ -106,4 +109,33 @@ class editPost extends Component {
     }
 
 }
+/* 
+ * Quill modules to attach to editor
+ * See https://quilljs.com/docs/modules/ for complete options
+ */
+editPost.modules = {
+  toolbar: [
+    [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+    [{size: []}],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote','code'],
+    [{'list': 'ordered'}, {'list': 'bullet'}, 
+     {'indent': '-1'}, {'indent': '+1'}],
+    ['link', 'image', 'video'],
+    ['clean']
+  ],
+  clipboard: {
+    // toggle to add extra line breaks when pasting HTML:
+    matchVisual: false,
+  }
+}
+/* 
+ * Quill editor formats
+ * See https://quilljs.com/docs/formats/
+ */
+editPost.formats = [
+  'header', 'font', 'size',
+  'bold', 'italic', 'underline', 'strike', 'blockquote',
+  'list', 'bullet', 'indent',
+  'link', 'image', 'video'
+]
 export default editPost

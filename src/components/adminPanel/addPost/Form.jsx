@@ -3,6 +3,8 @@ import axios from 'axios'
 import Aux from '../../hoc/_Aux'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';   
 class Form extends Component {
     state = {
         title: '',
@@ -28,8 +30,12 @@ class Form extends Component {
             console.log(error.response)
         });
     }
-
+    handleChange=(value)=>{
+        this.setState({ content: value })
+      }
+    
     render(){
+        
         return(
             <Aux>
             <div className="form-group">
@@ -48,10 +54,7 @@ class Form extends Component {
               <label htmlFor="exampleInputPassword1">Tag</label>
               <input type="text" className="form-control" id="postTag" aria-describedby="postTag"/>
             </div>
-            <div className="form-group">
-              <label htmlFor="exampleTextarea">Content</label>
-              <textarea value={this.state.content} onChange={(event)=>this.setState({content:(event.target.value)})} className="form-control" id="exampleTextarea" rows="3"></textarea>
-            </div>
+            <ReactQuill value={this.state.content} onChange={this.handleChange}  modules={Form.modules} formats={Form.formats}/>
             <div className="form-group">
               <label htmlFor="exampleInputFile">Image</label>
               <input type="file" className="form-control-file" id="exampleInputFile" aria-describedby="fileHelp"/>
@@ -63,6 +66,36 @@ class Form extends Component {
 
         )
     }
+
 }
+/* 
+ * Quill modules to attach to editor
+ * See https://quilljs.com/docs/modules/ for complete options
+ */
+Form.modules = {
+    toolbar: [
+      [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+      [{size: []}],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      [{'list': 'ordered'}, {'list': 'bullet'}, 
+       {'indent': '-1'}, {'indent': '+1'}],
+      ['link', 'image', 'video'],
+      ['clean']
+    ],
+    clipboard: {
+      // toggle to add extra line breaks when pasting HTML:
+      matchVisual: false,
+    }
+  }
+  /* 
+   * Quill editor formats
+   * See https://quilljs.com/docs/formats/
+   */
+  Form.formats = [
+    'header', 'font', 'size',
+    'bold', 'italic', 'underline', 'strike', 'blockquote',
+    'list', 'bullet', 'indent',
+    'link', 'image', 'video'
+  ]
 
 export default Form
