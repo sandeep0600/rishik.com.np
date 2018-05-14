@@ -10,17 +10,28 @@ class Form extends Component {
         title: '',
         author:'',
         category:'',
-        content:''
+        content:'',
+        image: null
 
     }
     SendInfo=()=>{
-        const data = {
-            title:this.state.title,
-            author:this.state.author,
-            category:this.state.category,
-            content:this.state.content
-        }
-        axios.post('http://localhost:4000/api/posts',data)
+        const formData = new FormData()
+        formData.append('image', this.state.image, this.state.image.name)
+        formData.append('title', this.state.title )
+        formData.append('author', this.state.author )
+        formData.append('category', this.state.category )
+        formData.append('content', this.state.content )
+        // console.log('ababs')
+        // console.log(this.state.image)
+        // const data = {
+        //     title:this.state.title,
+        //     author:this.state.author,
+        //     category:this.state.category,
+        //     content:this.state.content,
+        //     image: formData
+        // }
+        // console.log(data)
+        axios.post('http://localhost:4000/api/posts',formData)
         .then(response =>{
             console.log(response)
             toast(<div><span></span> Your Post Successfully Save into the Database</div>);
@@ -33,7 +44,10 @@ class Form extends Component {
     handleChange=(value)=>{
         this.setState({ content: value })
       }
-    
+    imageuploadHangeler = (event) =>{
+        console.log(event.target.files[0])
+        this.setState({image:event.target.files[0] })
+    }
     render(){
         
         return(
@@ -57,7 +71,7 @@ class Form extends Component {
             <ReactQuill value={this.state.content} onChange={this.handleChange}  modules={Form.modules} formats={Form.formats}/>
             <div className="form-group">
               <label htmlFor="exampleInputFile">Image</label>
-              <input type="file" className="form-control-file" id="exampleInputFile" aria-describedby="fileHelp"/>
+              <input type="file" className="form-control-file" onChange={this.imageuploadHangeler} id="exampleInputFile" aria-describedby="fileHelp"/>
               <small id="fileHelp" className="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
             </div>
             <button type="submit" onClick={this.SendInfo} className="btn btn-primary">Submit</button>

@@ -1,9 +1,41 @@
 import React, {Component} from 'react'
 import App from '../App'
 import Footer from '../Footer/Footer'
+import axios from 'axios'
 import { NavLink } from 'react-router-dom';
 class gallery extends Component {
+
+    state={
+        imagesLink:[]
+    }
+    componentDidMount(){
+        axios.get('http://localhost:4000/api/posts/images/allImages')
+        .then(iamge=>{
+            console.log(iamge)
+            const Pro = iamge.data.postData
+            const somthing = Pro.map(datas=>{
+            return{
+                ...datas,
+                }
+
+        })
+        console.log(somthing)
+        this.setState({imagesLink : somthing})
+       
+    })
+}
+
+
     render(){
+        const gallery = this.state.imagesLink.map(ga =>{
+            return(
+                <a href={ga.image} data-toggle="lightbox" data-gallery="example-gallery" className="col-sm-4">
+                    <img src={ga.image} className="img-fluid"/>
+                </a>
+                
+
+            )
+        })
         return(
             <App>
                   <div className="content-wrapper">
@@ -16,59 +48,16 @@ class gallery extends Component {
                           </ol>
                          </div>
                          <div className="container">
-                            <div className="container gallery-container">
-                                <div className="tz-gallery">
-                                    <div className="row mb-3">
-                                        <div className="col-md-4">
-                                            <div className="card">
-                                                <NavLink className="lightbox" to="https://mobirise.com/bootstrap-4-theme/assets/images/brooke-lark-207271-2000x1333-800x533.jpg">
-                                                <img src="https://mobirise.com/bootstrap-4-theme/assets/images/brooke-lark-207271-2000x1333-800x533.jpg" alt="Park" className="card-img-top"/>
-                                                </NavLink>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-4">
-                                            <div className="card">
-                                                <a className="lightbox" href="https://mobirise.com/bootstrap-4-theme/assets/images/brooke-lark-207271-2000x1333-800x533.jpg">
-                                                <img src="https://mobirise.com/bootstrap-4-theme/assets/images/brooke-lark-207271-2000x1333-800x533.jpg" alt="Park" className="card-img-top"/>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-4">
-                                            <div className="card">
-                                                <a className="lightbox" href="https://mobirise.com/bootstrap-4-theme/assets/images/brooke-lark-207271-2000x1333-800x533.jpg">
-                                                <img src="https://mobirise.com/bootstrap-4-theme/assets/images/brooke-lark-207271-2000x1333-800x533.jpg" alt="Park" className="card-img-top"/>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="row"> 
-                                        <div className="col-md-4">
-                                            <div className="card">
-                                                <a className="lightbox" href="https://mobirise.com/bootstrap-4-theme/assets/images/brooke-lark-207271-2000x1333-800x533.jpg">
-                                                <img src="https://mobirise.com/bootstrap-4-theme/assets/images/brooke-lark-207271-2000x1333-800x533.jpg" alt="Park" className="card-img-top"/>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-4">
-                                            <div className="card">
-                                                <a className="lightbox" href="https://mobirise.com/bootstrap-4-theme/assets/images/brooke-lark-207271-2000x1333-800x533.jpg">
-                                                <img src="https://mobirise.com/bootstrap-4-theme/assets/images/brooke-lark-207271-2000x1333-800x533.jpg" alt="Park" className="card-img-top"/>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div className="col-md-4">
-                                            <div className="card">
-                                                <a className="lightbox" href="https://mobirise.com/bootstrap-4-theme/assets/images/brooke-lark-207271-2000x1333-800x533.jpg">
-                                                <img src="https://mobirise.com/bootstrap-4-theme/assets/images/brooke-lark-207271-2000x1333-800x533.jpg" alt="Park" className="card-img-top"/>
-                                                </a>
-                                            </div>
+                            <div class="row justify-content-center">
+                                    <div className="col-md-12">
+                                        <div className="row">
+                                           {gallery}
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            </div>
+                        </div>
                    </div>
-                   <Footer/>
+            <Footer/>
         </App>
         )
     }
