@@ -21,16 +21,6 @@ class Form extends Component {
         formData.append('author', this.state.author )
         formData.append('category', this.state.category )
         formData.append('content', this.state.content )
-        // console.log('ababs')
-        // console.log(this.state.image)
-        // const data = {
-        //     title:this.state.title,
-        //     author:this.state.author,
-        //     category:this.state.category,
-        //     content:this.state.content,
-        //     image: formData
-        // }
-        // console.log(data)
         axios.post('http://localhost:4000/api/posts',formData)
         .then(response =>{
             console.log(response)
@@ -72,6 +62,7 @@ class Form extends Component {
             <div className="form-group">
               <label htmlFor="exampleInputFile">Image</label>
               <input type="file" className="form-control-file" onChange={this.imageuploadHangeler} id="exampleInputFile" aria-describedby="fileHelp"/>
+
               <small id="fileHelp" className="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
             </div>
             <button type="submit" onClick={this.SendInfo} className="btn btn-primary">Submit</button>
@@ -90,7 +81,7 @@ Form.modules = {
     toolbar: [
       [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
       [{size: []}],
-      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote','code'],
       [{'list': 'ordered'}, {'list': 'bullet'}, 
        {'indent': '-1'}, {'indent': '+1'}],
       ['link', 'image', 'video'],

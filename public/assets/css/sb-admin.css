@@ -476,3 +476,11 @@ footer.sticky-footer {
     width: calc(100% - 55px);
   }
 }
+
+.preview-image img{
+  max-width: 40%;
+}
+
+.preview-image {
+  padding-bottom: 20px;
+}

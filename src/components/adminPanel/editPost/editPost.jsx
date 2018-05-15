@@ -15,7 +15,9 @@ class editPost extends Component {
         title: '',
         author:'',
         category:'',
-        content:''
+        content:'',
+        image: null,
+        imageLink:''
 
     }
     componentDidMount(){
@@ -31,7 +33,9 @@ class editPost extends Component {
             title:Pro.title,
             author:Pro.author,
             category:Pro.category,
-            content:Pro.content
+            content:Pro.content,
+            imageLink:Pro.image
+
           })
         //Progress.hide(); 
         },3000)
@@ -40,13 +44,14 @@ class editPost extends Component {
   // },3000)
     }
     SendInfo=()=>{
-        const data = {
-            title:this.state.title,
-            author:this.state.author,
-            category:this.state.category,
-            content:this.state.content
-        }
-        axios.put('http://localhost:4000/api/posts/post='+ this.props.match.params.id+'&action=edit', data)
+        const formData = new FormData();
+        formData.append('image', this.state.image, this.state.image.name)
+        formData.append('title', this.state.title )
+        formData.append('author', this.state.author )
+        formData.append('category', this.state.category )
+        formData.append('content', this.state.content )
+
+        axios.put('http://localhost:4000/api/posts/post='+ this.props.match.params.id+'&action=edit', formData)
         .then(response =>{
             console.log(response)
             toast(<div><span></span> Your Post Successfully Updated into the Database</div>);
@@ -58,6 +63,10 @@ class editPost extends Component {
     handleChange=(value)=>{
       this.setState({ content: value })
     }
+    imageuploadHangeler = (event) =>{
+      console.log(event.target.files[0])
+      this.setState({image:event.target.files[0] })
+     }
     render(){
         //console.log(this.state.posts)
         
@@ -73,7 +82,7 @@ class editPost extends Component {
                 </ol>
                 <div className="row">
                   <div className="container">
-                  {/* <Progress.Component/> */}
+                 
                     <div className="form-group">
                       <label htmlFor="exampleInputEmail1">Title</label>
                       <input type="text" placeholder={this.state.title} onChange={(event)=>this.setState({title:(event.target.value)})} className="form-control" id="postTitle" aria-describedby="postTitle"/>
@@ -94,7 +103,10 @@ class editPost extends Component {
                     <ReactQuill value={this.state.content} onChange={this.handleChange}  modules={editPost.modules} formats={editPost.formats}/>
                     <div className="form-group">
                       <label htmlFor="exampleInputFile">Image</label>
-                      <input type="file" className="form-control-file" id="exampleInputFile" aria-describedby="fileHelp"/>
+                      <div class="preview-image">
+                      <img src={this.state.imageLink}/>
+                      </div>
+                      <input type="file" className="form-control-file" onChange={this.imageuploadHangeler} id="exampleInputFile" aria-describedby="fileHelp"/>
                       <small id="fileHelp" className="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
                     </div>
                     <button type="submit" onClick={this.SendInfo} className="btn btn-primary">Submit</button>

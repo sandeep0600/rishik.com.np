@@ -29,7 +29,7 @@ class gallery extends Component {
     render(){
         const gallery = this.state.imagesLink.map(ga =>{
             return(
-                <a href={ga.image} data-toggle="lightbox" data-gallery="example-gallery" className="col-sm-4">
+                <a key={ga._id} href={ga.image} data-toggle="lightbox" data-gallery="example-gallery" className="col-sm-4">
                     <img src={ga.image} className="img-fluid"/>
                 </a>
                 
