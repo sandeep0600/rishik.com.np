@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 
 import {NavLink} from 'react-router-dom'
+
 class Menu extends Component {
     render(){
         return(
@@ -12,7 +13,7 @@ class Menu extends Component {
             <div className="collapse navbar-collapse" id="navbarResponsive">
               <ul className="navbar-nav navbar-sidenav" id="exampleAccordion">
                 <li className="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                  <NavLink className="nav-link" exact to="/"><i className="fa fa-fw fa-dashboard"></i>
+                  <NavLink exect className="nav-link" exact to="/"><i className="fa fa-fw fa-dashboard"></i>
                   <span className="nav-link-text">&nbsp;Dashboard</span></NavLink>
                 </li>
                 <li className="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
@@ -22,15 +23,18 @@ class Menu extends Component {
                 </NavLink>
                 <ul className="sidenav-second-level collapse" id="collapseComponents">
                   <li>
-                    <NavLink to="/addpost">Add Post</NavLink>
+                    <NavLink exect to="/addpost">Add Post</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/allpost">All Post</NavLink>
+                    <NavLink exect to="/allpost">All Post</NavLink>
+                  </li>
+                  <li>
+                    <NavLink exect to="/addcategory">Category</NavLink>
                   </li>
                 </ul>
                 </li>
                 <li className="nav-item" data-toggle="tooltip" data-placement="right" title="gallery">
-                <NavLink className="nav-link" exact to="/gallery"><i className="fa fa-image"></i><span className="nav-link-text">
+                <NavLink exect className="nav-link" exact to="/gallery"><i className="fa fa-image"></i><span className="nav-link-text">
                 &nbsp;Gallery</span></NavLink>
                 </li>
               </ul>

@@ -5,6 +5,7 @@ import addPost from '../adminPanel/addPost/addPost'
 import editPost from '../adminPanel/editPost/editPost'
 import allPost from '../adminPanel/allPost/allPost'
 import gallery from '../adminPanel/gallery/gallery'
+import category from '../adminPanel/addCategory/addCategory'
 class appRoute extends Component {
     render(){
         return(
@@ -14,6 +15,7 @@ class appRoute extends Component {
                         <Route path="/addpost" component={addPost} />
                         <Route path="/editpost/post=:id&action=edit" component={editPost} />
                         <Route path="/allpost" component={allPost} />
+                        <Route path="/addcategory" component={category} />
                         <Route path="/gallery" component={gallery} />
 
                     </Switch>
