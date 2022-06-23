@@ -10,10 +10,12 @@ class Table extends Component {
     }
    componentDidMount(){
     Progress.show();
-       axios.get('http://localhost:4000/api/posts/')
+       axios.get('http://localhost:3000/todos')
        .then(result =>{
            console.log(result)
-            const Pro = result.data.postData
+            // const Pro = result.data.postData
+            const Pro = result.data
+
             const somthing = Pro.map(datas=>{
             return{
                 ...datas,
@@ -29,7 +31,7 @@ class Table extends Component {
  
    }
   delete(allposts){
-   axios.delete('http://localhost:4000/api/posts/'+ allposts._id)
+   axios.delete('http://localhost:3000/todo/'+ allposts._id)
    const newState = this.state.posts.slice();
     if (newState.indexOf(allposts) > -1) {
       newState.splice(newState.indexOf(allposts), 1);
@@ -44,7 +46,8 @@ class Table extends Component {
                       <td>{allposts.title}</td>
                       <td>{allposts.author}</td>
                       <td>{allposts.category}</td>
-                      <td></td>
+                      <td>{allposts.tag}</td>
+                   
                       <td><NavLink to={'/editpost/post='+ allposts._id+'&action=edit' } type="button" className="btn btn-primary">Edit</NavLink>&nbsp;<button type="button" onClick={this.delete.bind(this, allposts)} className="btn btn-danger">Delete</button></td>
                </tr>
             )

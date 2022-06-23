@@ -9,21 +9,22 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; 
 // import Progress from "react-progress-2";
 // import "react-progress-2/main.css"
-class editPost extends Component {
+class EditPost extends Component {
     state = {
         posts:[],
         title: '',
         author:'',
         category:'',
+        tag:'',
         content:'',
-        image: null,
-        imageLink:''
+        // image: null,
+        // imageLink:''
 
     }
     componentDidMount(){
      // Progress.show();
   //    setTimeout(()=> {  
-      axios.get('http://localhost:4000/api/posts/'+ this.props.match.params.id)
+      axios.get('http://localhost:3000/todo/'+ this.props.match.params.id)
       .then(result=>{
           //console.log(result)
           const Pro = result.data
@@ -33,8 +34,9 @@ class editPost extends Component {
             title:Pro.title,
             author:Pro.author,
             category:Pro.category,
+            tag:Pro.tag,
             content:Pro.content,
-            imageLink:Pro.image
+            // imageLink:Pro.image
 
           })
         //Progress.hide(); 
@@ -45,13 +47,15 @@ class editPost extends Component {
     }
     SendInfo=()=>{
         const formData = new FormData();
-        formData.append('image', this.state.image, this.state.image.name)
+        // formData.append('image', this.state.image, this.state.image.name)
         formData.append('title', this.state.title )
         formData.append('author', this.state.author )
         formData.append('category', this.state.category )
         formData.append('content', this.state.content )
 
-        axios.put('http://localhost:4000/api/posts/post='+ this.props.match.params.id+'&action=edit', formData)
+        // axios.put('http://localhost:3000/todo/'+ this.props.match.params.id+'&action=edit', this.state)
+        axios.put('http://localhost:3000/todo/'+ this.props.match.params.id, this.state)
+
         .then(response =>{
             console.log(response)
             toast(<div><span></span> Your Post Successfully Updated into the Database</div>);
@@ -97,10 +101,10 @@ class editPost extends Component {
                     </div>
                     <div className="form-group">
                       <label htmlFor="exampleInputPassword1">Tag</label>
-                      <input type="text" className="form-control" id="postTag" aria-describedby="postTag"/>
+                      <input type="text" placeholder={this.state.tag} onChange={(event)=>this.setState({tag:(event.target.value)})} className="form-control" id="postTag" aria-describedby="postTag"/>
                     </div>
                     <label htmlFor="exampleInputPassword1">Content</label>
-                    <ReactQuill value={this.state.content} onChange={this.handleChange}  modules={editPost.modules} formats={editPost.formats}/>
+                    <ReactQuill value={this.state.content} onChange={this.handleChange}  modules={EditPost.modules} formats={EditPost.formats}/>
                     <div className="form-group">
                       <label htmlFor="exampleInputFile">Image</label>
                       <div class="preview-image">
@@ -125,7 +129,7 @@ class editPost extends Component {
  * Quill modules to attach to editor
  * See https://quilljs.com/docs/modules/ for complete options
  */
-editPost.modules = {
+EditPost.modules = {
   toolbar: [
     [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
     [{size: []}],
@@ -144,10 +148,10 @@ editPost.modules = {
  * Quill editor formats
  * See https://quilljs.com/docs/formats/
  */
-editPost.formats = [
+EditPost.formats = [
   'header', 'font', 'size',
   'bold', 'italic', 'underline', 'strike', 'blockquote',
   'list', 'bullet', 'indent',
   'link', 'image', 'video'
 ]
-export default editPost
+export default EditPost

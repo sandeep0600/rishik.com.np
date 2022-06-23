@@ -7,7 +7,7 @@ class Footer extends Component {
             <footer className="sticky-footer">
             <div className="container">
                 <div className="text-center">
-                <small>Copyright © Your Website 2018</small>
+                <small>Copyright © 2022 - Blog Website | All Rights Reserved</small>
                 </div>
             </div>
             </footer>

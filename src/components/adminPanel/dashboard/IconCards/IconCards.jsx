@@ -46,9 +46,9 @@ class IconCards extends Component {
                   <div className="card-body-icon">
                     <i className="fa fa-fw fa-list"></i>
                   </div>
-                  <div className="mr-5">11 New Tasks!</div>
+                  <div className="mr-5">All Posts!</div>
                 </div>
-                <a className="card-footer text-white clearfix small z-1" href="/">
+                <a className="card-footer text-white clearfix small z-1" href="/allpost">
                   <span className="float-left">View Details</span>
                   <span className="float-right">
                     <i className="fa fa-angle-right"></i>
@@ -62,9 +62,9 @@ class IconCards extends Component {
                   <div className="card-body-icon">
                     <i className="fa fa-fw fa-shopping-cart"></i>
                   </div>
-                  <div className="mr-5">123 New Orders!</div>
+                  <div className="mr-5">Add Post!</div>
                 </div>
-                <a className="card-footer text-white clearfix small z-1" href="/">
+                <a className="card-footer text-white clearfix small z-1" href="/addpost">
                   <span className="float-left">View Details</span>
                   <span className="float-right">
                     <i className="fa fa-angle-right"></i>
@@ -78,9 +78,9 @@ class IconCards extends Component {
                   <div className="card-body-icon">
                     <i className="fa fa-fw fa-support"></i>
                   </div>
-                  <div className="mr-5">13 New Tickets!</div>
+                  <div className="mr-5">View & Add Category!</div>
                 </div>
-                <a className="card-footer text-white clearfix small z-1" href="/">
+                <a className="card-footer text-white clearfix small z-1" href="/addcategory">
                   <span className="float-left">View Details</span>
                   <span className="float-right">
                     <i className="fa fa-angle-right"></i>

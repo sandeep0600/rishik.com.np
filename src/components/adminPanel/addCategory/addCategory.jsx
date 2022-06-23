@@ -4,7 +4,7 @@ import Addcatform from './addCatForm'
 import Showcat from './showCat'
 import Footer from '../Footer/Footer'
 import {NavLink} from 'react-router-dom'
-class category extends Component {
+class Category extends Component {
     render(){
         return(
             <App>
@@ -12,7 +12,7 @@ class category extends Component {
               <div className="container-fluid">
                 <ol className="breadcrumb">
                   <li className="breadcrumb-item">
-                    <NavLink to="#">Dashboard</NavLink>
+                    <NavLink to="/dashboard">Dashboard</NavLink>
                   </li>
                   <li className="breadcrumb-item active">Add Category</li>
                 </ol>
@@ -35,4 +35,4 @@ class category extends Component {
     }
 }
 
-export default category
+export default Category

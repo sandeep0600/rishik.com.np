@@ -9,10 +9,10 @@ class gallery extends Component {
         imagesLink:[]
     }
     componentDidMount(){
-        axios.get('http://localhost:4000/api/posts/images/allImages')
+        axios.get('http://localhost:3000/todos/image')
         .then(iamge=>{
             console.log(iamge)
-            const Pro = iamge.data.postData
+            const Pro = iamge.data;
             const somthing = Pro.map(datas=>{
             return{
                 ...datas,

@@ -1,24 +1,28 @@
 import React, { Component } from 'react'
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import dashboard from '../adminPanel/dashboard/dashboard'
-import addPost from '../adminPanel/addPost/addPost'
-import editPost from '../adminPanel/editPost/editPost'
-import allPost from '../adminPanel/allPost/allPost'
-import gallery from '../adminPanel/gallery/gallery'
-import category from '../adminPanel/addCategory/addCategory'
+import {BrowserRouter as Router, Route,Routes} from 'react-router-dom'
+import Dashboard from '../adminPanel/dashboard/Dashboard'
+import AddPost from '../adminPanel/addPost/AddPost'
+import EditPost from '../adminPanel/editPost/EditPost'
+import AllPost from '../adminPanel/allPost/AllPost'
+import Gallery from '../adminPanel/gallery/gallery'
+import Category from '../adminPanel/addCategory/AddCategory'
+import Login from '../../Login'
+
 class appRoute extends Component {
     render(){
         return(
             <Router>
-                    <Switch>
-                        <Route exact path="/" component={dashboard} />
-                        <Route path="/addpost" component={addPost} />
-                        <Route path="/editpost/post=:id&action=edit" component={editPost} />
-                        <Route path="/allpost" component={allPost} />
-                        <Route path="/addcategory" component={category} />
-                        <Route path="/gallery" component={gallery} />
+                    <Routes>
+                        <Route exact path="/dashboard" element={<Dashboard/>} />
+                        <Route path="/addpost" element={<AddPost/>} />
+                        <Route path="/editpost/post=:id&action=edit" element={<EditPost/>} />
+                        <Route path="/allpost" element={<AllPost/>} />
+                        <Route path="/addcategory" element={<Category/>} />
+                        <Route path="/gallery" element={<Gallery/>} />
+                        <Route path="/" element={<Login/>} />
 
-                    </Switch>
+                        </Routes>
+           
             </Router>
         )
     }

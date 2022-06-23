@@ -3,7 +3,7 @@ import App from '../App'
 import Footer from '../Footer/Footer'
 import IconCards from './IconCards/IconCards'
 import { NavLink } from 'react-router-dom';
-class dashboard extends Component {
+class Dashboard extends Component {
     render(){
         return(
            <App>
@@ -11,7 +11,7 @@ class dashboard extends Component {
                   <div className="container-fluid">
                     <ol className="breadcrumb">
                       <li className="breadcrumb-item">
-                        <NavLink to="#">Dashboard</NavLink>
+                        <NavLink to="/dashboard">Dashboard</NavLink>
                       </li>
                       <li className="breadcrumb-item active">My Dashboard</li>
                     </ol>
@@ -24,4 +24,4 @@ class dashboard extends Component {
     }
 
 }
-export default dashboard
+export default Dashboard
