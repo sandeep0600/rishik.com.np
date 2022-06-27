@@ -5,14 +5,10 @@ import'../src/cddd.css'
 // import icon from './assets/hazardlogo.jpg'
 import icon from './assets/firelogo.png'
 import iconarrow from './assets/fast.png'
-import { async } from '@firebase/util';
-import {Link } from 'react-router-dom';
 
-import {signin} from '../src/firebase'
-import { useNavigate  } from "react-router-dom";
-// import Password from 'antd/lib/input/Password';
-// import { useNavigate } from "react-router-dom";
-import Dashboard from './components/adminPanel/dashboard/Dashboard';
+import { Route, Redirect } from 'react-router'
+import signin from './firebase'
+
 
 
 
@@ -53,19 +49,32 @@ class Login extends Component {
 //   // dispatch(AddUser())
 // }
 
-SendInfo= ()=>{
-    // e.preventDefault();
+SendInfo= (e)=>{
+    e.preventDefault();
 
    let  email1 = this.state.email;
     let password1 = this.state.password;
     // this.props.naviagtes('/Dashboard')
     // let history = useNavigate();
 // try{
-    // console.log( await signin(email1,password1));
-   //  alert('successful');
-//    if (email1 == "admin@blog.com" && password1 == "123456") {
+    // console.log(signin(email1,password1));
+    // alert('successful');
+{/* <Redirect push to="/dashboard" /> */}
+
+
+   if (email1 == "admin@blog.com" && password1 == "123456") {
 //     console.log("succefull");
-  
+    // <Route exact path='/'>
+    window.location.href='/dashboard'
+   }
+// this.props.history.push('/dashboard');
+    {/* </Route> */}
+   
+    // alert('successful');
+//    }
+// { <Route exact path="/">
+// {signin(email1,password1) ? <Redirect to="/dashboard" /> : <Login />}
+// </Route> }
 
     // <Dashboard/>
 //    }
@@ -163,7 +172,7 @@ render(){
         <label className="sLabeltwo">Password</label> <br/>
         <input value={this.state.password} onChange={(event)=>this.setState({password:(event.target.value)})}  className="sInputOne2" type='text' placeholder='Enter Password' ></input> <br/>     
         </div>   
-        <button type="submit" onClick={this.SendInfo.bind(this)}  className="sBtnSignup">
+        <button type="submit" onClick={this.SendInfo}  className="sBtnSignup">
             
           Sign In
       

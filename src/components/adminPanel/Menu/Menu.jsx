@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 
-import {NavLink} from 'react-router-dom'
+import {NavLink,Link} from 'react-router-dom'
+
 
 class Menu extends Component {
     render(){
@@ -11,17 +12,17 @@ class Menu extends Component {
               <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarResponsive">
+         
               <ul className="navbar-nav navbar-sidenav" id="exampleAccordion">
-                <li className="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                  <NavLink exect className="nav-link" exact to="/dashboard"><i className="fa fa-fw fa-dashboard"></i>
-                  <span className="nav-link-text" style={{marginTop:'50px'}}>&nbsp;Dashboard</span></NavLink>
+                <li  className="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard" >
+                <Link to="/dashboard">     <NavLink  style={{marginTop:'150px'}}  exect className="nav-link" exact to="/dashboard"><i className="fa fa-fw fa-dashboard"></i>
+                  <span className="nav-link-text">&nbsp;Dashboard</span></NavLink></Link>
                 </li>
-                <li className="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
-                <NavLink className="nav-link nav-link-collapse collapsed" data-toggle="collapse" to="#collapseComponents" data-parent="#exampleAccordion">
-                <i className="fa fa-fw fa-wrench"></i>
+                <li style={{marginTop:'-90px'}} className="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+               {/* <Link className="nav-link nav-link-collapse collapsed" data-toggle="collapse" to="#collapseComponents" data-parent="#exampleAccordion">
                 <span className="nav-link-text">&nbsp;Posts</span>
-                </NavLink>
-                <ul className="sidenav-second-level collapse" id="collapseComponents">
+                </Link> */}
+                {/* <ul className="sidenav-second-level collapse" id="collapseComponents">
                   <li>
                     <NavLink exect to="/addpost">Add Post</NavLink>
                   </li>
@@ -31,7 +32,7 @@ class Menu extends Component {
                   <li>
                     <NavLink exect to="/addcategory">Category</NavLink>
                   </li>
-                </ul>
+                </ul> */}
                 </li>
                 {/* <li className="nav-item" data-toggle="tooltip" data-placement="right" title="gallery">
                 <NavLink exect className="nav-link" exact to="/gallery"><i className="fa fa-image"></i><span className="nav-link-text">

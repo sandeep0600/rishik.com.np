@@ -15,7 +15,7 @@ class appRoute extends Component {
                     <Routes>
                         <Route exact path="/dashboard" element={<Dashboard/>} />
                         <Route path="/addpost" element={<AddPost/>} />
-                        <Route path="/editpost/post=:id&action=edit" element={<EditPost/>} />
+                        <Route path="/editpost/post=:id" element={<EditPost/>} />
                         <Route path="/allpost" element={<AllPost/>} />
                         <Route path="/addcategory" element={<Category/>} />
                         <Route path="/gallery" element={<Gallery/>} />

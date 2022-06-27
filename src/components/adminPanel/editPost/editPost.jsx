@@ -7,8 +7,15 @@ import {NavLink} from 'react-router-dom'
 import axios from 'axios'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'; 
+import {useParams} from "react-router-dom";
 // import Progress from "react-progress-2";
 // import "react-progress-2/main.css"
+
+function withParams(Component) {
+  return props => <Component {...props} params={useParams()} />;
+}
+
+
 class EditPost extends Component {
     state = {
         posts:[],
@@ -17,14 +24,29 @@ class EditPost extends Component {
         category:'',
         tag:'',
         content:'',
-        // image: null,
-        // imageLink:''
+        image: null,
+        imageLink:''
 
     }
+
+    convertToBase64 = (file) => {
+      return new Promise((resolve, reject) => {
+          const fileReader = new FileReader();
+          fileReader.readAsDataURL(file);
+          fileReader.onload = () => {
+              resolve(fileReader.result);
+          };
+          fileReader.onerror = (error) => {
+              reject(error);
+          };
+      });
+  };
     componentDidMount(){
      // Progress.show();
   //    setTimeout(()=> {  
-      axios.get('http://localhost:3000/todo/'+ this.props.match.params.id)
+ 
+
+      axios.get('http://localhost:3000/todo'+this.props.params.id)
       .then(result=>{
           //console.log(result)
           const Pro = result.data
@@ -36,7 +58,7 @@ class EditPost extends Component {
             category:Pro.category,
             tag:Pro.tag,
             content:Pro.content,
-            // imageLink:Pro.image
+            imageLink:Pro.image
 
           })
         //Progress.hide(); 
@@ -54,7 +76,7 @@ class EditPost extends Component {
         formData.append('content', this.state.content )
 
         // axios.put('http://localhost:3000/todo/'+ this.props.match.params.id+'&action=edit', this.state)
-        axios.put('http://localhost:3000/todo/'+ this.props.match.params.id, this.state)
+        axios.put('http://localhost:3000/todo/'+this.props.params.id, this.state)
 
         .then(response =>{
             console.log(response)
@@ -67,10 +89,19 @@ class EditPost extends Component {
     handleChange=(value)=>{
       this.setState({ content: value })
     }
-    imageuploadHangeler = (event) =>{
+    imageuploadHangeler = async (event) =>{
       console.log(event.target.files[0])
-      this.setState({image:event.target.files[0] })
-     }
+      // let blankLetterHeadBase64 = this.getBase64(event.target.files[0]);
+      // this.setState({image:event.target.files[0] })
+      // this.setState({image:blankLetterHeadBase64 })
+
+      // const file = event.target.files[0];
+      const base64 = await this.convertToBase64(event.target.files[0]);
+      // setPostImage({ ...postImage, myFile: base64 });
+      this.setState({image:(base64) })
+      console.log(base64 )
+
+  }
     render(){
         //console.log(this.state.posts)
         
@@ -80,7 +111,7 @@ class EditPost extends Component {
               <div className="container-fluid">
                 <ol className="breadcrumb">
                   <li className="breadcrumb-item">
-                    <NavLink to="#">Dashboard</NavLink>
+                    <NavLink to="/dashboard">Dashboard</NavLink>
                   </li>
                   <li className="breadcrumb-item active">Edit Post</li>
                 </ol>
@@ -154,4 +185,4 @@ EditPost.formats = [
   'list', 'bullet', 'indent',
   'link', 'image', 'video'
 ]
-export default EditPost
+export default withParams(EditPost)

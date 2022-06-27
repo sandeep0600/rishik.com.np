@@ -72,7 +72,7 @@ class IconCards extends Component {
                 </a>
               </div>
           </div>
-          <div className="col-xl-3 col-sm-6 mb-3">
+          {/* <div className="col-xl-3 col-sm-6 mb-3">
               <div className="card text-white bg-danger o-hidden h-100">
                 <div className="card-body">
                   <div className="card-body-icon">
@@ -87,7 +87,7 @@ class IconCards extends Component {
                   </span>
                 </a>
               </div>
-          </div>
+          </div> */}
         </div>
         )
     }

@@ -3,11 +3,13 @@ import axios from 'axios'
 import Progress from "react-progress-2";
 import "react-progress-2/main.css"
 import { NavLink } from 'react-router-dom';
+
 class Table extends Component {
 
     state ={
         posts : []
     }
+
    componentDidMount(){
     Progress.show();
        axios.get('http://localhost:3000/todos')
@@ -48,7 +50,7 @@ class Table extends Component {
                       <td>{allposts.category}</td>
                       <td>{allposts.tag}</td>
                    
-                      <td><NavLink to={'/editpost/post='+ allposts._id+'&action=edit' } type="button" className="btn btn-primary">Edit</NavLink>&nbsp;<button type="button" onClick={this.delete.bind(this, allposts)} className="btn btn-danger">Delete</button></td>
+                      <td><NavLink to={'/editpost/post='+ allposts._id } type="button" className="btn btn-primary">Edit</NavLink>&nbsp;<button type="button" onClick={this.delete.bind(this, allposts)} className="btn btn-danger">Delete</button></td>
                </tr>
             )
         })
