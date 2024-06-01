@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import {BrowserRouter as Router, Route,Routes} from 'react-router-dom'
 import Dashboard from '../adminPanel/dashboard/Dashboard'
-import AddPost from '../adminPanel/addPost/AddPost'
-import EditPost from '../adminPanel/editPost/EditPost'
-import AllPost from '../adminPanel/allPost/AllPost'
+import AddPost from '../adminPanel/addPost/addPost'
+import EditPost from '../adminPanel/editPost/editPost'
+import AllPost from '../adminPanel/allPost/allPost'
 import Gallery from '../adminPanel/gallery/gallery'
-import Category from '../adminPanel/addCategory/AddCategory'
+import Category from '../adminPanel/addCategory/addCategory'
 import Login from '../../Login'
 
 class appRoute extends Component {
